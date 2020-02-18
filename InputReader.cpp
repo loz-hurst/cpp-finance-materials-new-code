@@ -2,6 +2,10 @@
 // Created by laure on 11/02/2020.
 //
 
+#include <memory>
+#include <string>
+#include <exception>
+#include <istream>
 #include "InputReader.hpp"
 
 std::unique_ptr<std::string> InputReader::GetNextField() {

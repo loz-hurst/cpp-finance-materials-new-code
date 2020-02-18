@@ -13,7 +13,7 @@ class InputReader {
 private:
     std::shared_ptr<std::istream> input_stream_;
 protected:
-    // Process next character from file.  Passed char as and argument.  Returns true if reached end of the current field.  False otherwise.
+    // Process next character from file.  Passed char as an argument.  Returns true if reached end of the current field.  False otherwise.
     virtual bool ProcessChar(const char) = 0;
     std::string current_field_;
 public:
