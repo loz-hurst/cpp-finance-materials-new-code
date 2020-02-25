@@ -12,7 +12,7 @@ private:
     bool inside_double_quote_;
     bool last_char_double_quote_;
 protected:
-    virtual bool ProcessChar(const char in_char);
+    virtual bool ProcessChar(const char in_char) override;
 public:
     CSVInputReader(std::shared_ptr<std::istream> input_stream) : InputReader(input_stream), inside_double_quote_{false}, last_char_double_quote_{false} {}
 };
