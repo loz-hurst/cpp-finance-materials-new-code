@@ -3,4 +3,4 @@ project(inputreader)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(inputreader main.cpp InputReader.cpp InputReader.hpp TSVInputReader.cpp TSVInputReader.hpp)
+add_executable(inputreader main.cpp InputReader.cpp InputReader.hpp TSVInputReader.cpp TSVInputReader.hpp CSVInputReader.cpp CSVInputReader.hpp)

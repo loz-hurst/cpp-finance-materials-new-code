@@ -3,20 +3,22 @@
 #include <string>
 #include <memory>
 
-#include "TSVInputReader.hpp"
+#include "CSVInputReader.hpp"
 
 int main() {
-    const std::string filename {"../test.tsv"};
+    const std::string filename {"../test.csv"};
     std::shared_ptr<std::ifstream> in_file {std::make_shared<std::ifstream>(filename)};
     if (!in_file->good()){
         std::cerr << "Problem opening the file: " << filename << std::endl;
         return 1;
     }
-    TSVInputReader tsv_reader {in_file};
+    CSVInputReader csv_reader {in_file};
 
-    std::cout << (*tsv_reader.GetNextField()) << std::endl;
-    std::cout << (*tsv_reader.GetNextField()) << std::endl;
-    std::cout << (*tsv_reader.GetNextField()) << std::endl;
-    std::cout << "Hello, World!" << std::endl;
+    std::cout << (*csv_reader.GetNextField()) << std::endl;
+    std::cout << (*csv_reader.GetNextField()) << std::endl;
+    std::cout << (*csv_reader.GetNextField()) << std::endl;
+    std::cout << (*csv_reader.GetNextField()) << std::endl;
+    std::cout << (*csv_reader.GetNextField()) << std::endl;
+
     return 0;
 }
