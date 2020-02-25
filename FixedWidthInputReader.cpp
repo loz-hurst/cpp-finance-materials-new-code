@@ -8,7 +8,7 @@ bool FixedWidthInputReader::ProcessChar(const char in_char) {
     if (in_char == '\n') {
         current_field_count_ = 0;
         current_field_chars_ = 0;
-        return true;
+        return false;
     }
     current_field_ += in_char;
     ++current_field_chars_;
