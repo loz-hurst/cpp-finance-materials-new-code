@@ -68,5 +68,4 @@ public:
     virtual std::unique_ptr<std::string> GetNextField();
 };
 
-
 #endif //INPUTREADER_INPUTREADER_HPP

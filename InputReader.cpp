@@ -17,9 +17,10 @@
  * along with C++ for Finance.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <string>
 #include <memory>
-
+#include <string>
+#include <exception>
+#include <istream>
 #include "InputReader.hpp"
 
 std::unique_ptr<std::string> InputReader::GetNextField() {
