@@ -22,11 +22,12 @@
 #include <string>
 #include <memory>
 
-#include "TSVInputReader.hpp"
+#include "CSVInputReader.hpp"
+#include "FixedWidthInputReader.hpp"
 
 // Program entry point
 int main() {
-    const std::string filename {"../test.tsv"}; // Input filename
+    const std::string filename {"../test.dat"}; // Input filename
 
     // Create an input file stream to the input file
     std::shared_ptr<std::ifstream> in_file {std::make_shared<std::ifstream>(filename)};
@@ -37,16 +38,16 @@ int main() {
         return 1;
     }
 
-    // Create an instance of our TSV reader
-    TSVInputReader tsv_reader {in_file};
+    // Create an instance of our FixedWidthInputReader
+    FixedWidthInputReader reader {in_file};
 
-    // Get the first 3 fields
-    std::cout << (*tsv_reader.GetNextField()) << std::endl;
-    std::cout << (*tsv_reader.GetNextField()) << std::endl;
-    std::cout << (*tsv_reader.GetNextField()) << std::endl;
+    // Get the first 5 fields
+    std::cout << (*reader.GetNextField()) << std::endl;
+    std::cout << (*reader.GetNextField()) << std::endl;
+    std::cout << (*reader.GetNextField()) << std::endl;
+    std::cout << (*reader.GetNextField()) << std::endl;
+    std::cout << (*reader.GetNextField()) << std::endl;
 
-    // Standard CLion starter code
-    std::cout << "Hello, World!" << std::endl;
     return 0;
 }
 
