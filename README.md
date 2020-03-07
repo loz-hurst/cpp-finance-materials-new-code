@@ -20,7 +20,7 @@ The original 3 hours slot format of 1hr lecture/2hr lab session wasn't working t
 
 This code is licensed under the GPLv3 (or later) and the following terms apply:
 
-This file is part of C++ for Finance.
+    This file is part of C++ for Finance.
 
     C++ for Finance is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
