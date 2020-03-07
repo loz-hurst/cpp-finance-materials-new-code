@@ -18,8 +18,6 @@
  */
 
 #include "TSVInputReader.hpp"
-#include <iostream>
-
 
 bool TSVInputReader::ProcessChar(const char in_char) {
     // Tab and newline end (and are not part of) fields.

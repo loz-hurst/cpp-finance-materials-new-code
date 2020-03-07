@@ -17,9 +17,6 @@
  * along with C++ for Finance.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <string>
-#include <memory>
-
 #include <memory>
 #include <string>
 #include <exception>

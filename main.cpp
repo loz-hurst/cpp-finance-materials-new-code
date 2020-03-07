@@ -26,17 +26,26 @@
 
 // Program entry point
 int main() {
-    const std::string filename {"../test.tsv"};
+    const std::string filename {"../test.tsv"}; // Input filename
+
+    // Create an input file stream to the input file
     std::shared_ptr<std::ifstream> in_file {std::make_shared<std::ifstream>(filename)};
+
+    // Check it opened okay - fail early if there's a problem.
     if (!in_file->good()){
         std::cerr << "Problem opening the file: " << filename << std::endl;
         return 1;
     }
+
+    // Create an instance of our TSV reader
     TSVInputReader tsv_reader {in_file};
 
+    // Get the first 3 fields
     std::cout << (*tsv_reader.GetNextField()) << std::endl;
     std::cout << (*tsv_reader.GetNextField()) << std::endl;
     std::cout << (*tsv_reader.GetNextField()) << std::endl;
+
+    // Standard CLion starter code
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
