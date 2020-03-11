@@ -42,11 +42,11 @@ int main() {
     FixedWidthInputReader reader {in_file};
 
     // Get the first 5 fields
-    std::cout << (*reader.GetNextField()) << std::endl;
-    std::cout << (*reader.GetNextField()) << std::endl;
-    std::cout << (*reader.GetNextField()) << std::endl;
-    std::cout << (*reader.GetNextField()) << std::endl;
-    std::cout << (*reader.GetNextField()) << std::endl;
+    std::cout << reader.GetNextField() << std::endl;
+    std::cout << reader.GetNextField() << std::endl;
+    std::cout << reader.GetNextField() << std::endl;
+    std::cout << reader.GetNextField() << std::endl;
+    std::cout << reader.GetNextField() << std::endl;
 
     return 0;
 }

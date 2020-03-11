@@ -24,6 +24,8 @@
 #include <memory>
 #include <string>
 
+#include "InputField.hpp"
+
 // Abstract base class for all input file readers
 class InputReader {
 private:
@@ -63,9 +65,9 @@ public:
 
     /* Method to get next field from the input stream.
      * Returns:
-     *   unique_ptr to string containing the next field in the stream.
+     *   String containing the next field in the stream.
      */
-    virtual std::unique_ptr<std::string> GetNextField();
+    InputField GetNextField();
 };
 
 #endif //INPUTREADER_INPUTREADER_HPP

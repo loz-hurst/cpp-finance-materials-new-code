@@ -21,9 +21,13 @@
 #include <string>
 #include <exception>
 #include <istream>
+
 #include "InputReader.hpp"
 
-std::unique_ptr<std::string> InputReader::GetNextField() {
+InputField InputReader::GetNextField() {
+    // Clear the field read for the next input
+    current_field_ = "";
+
     bool finished {false}; // Have we reached the end of the string?
 
     while(!finished) {
@@ -42,11 +46,7 @@ std::unique_ptr<std::string> InputReader::GetNextField() {
             finished = ProcessChar(in_char);
     }
 
-    // Return a unique pointer to the string (to avoid creating unnecessary copies)
-    std::unique_ptr<std::string> result {std::make_unique<std::string>(current_field_)};
-    // Clear the field read for the next input
-    current_field_ = "";
-    // Return the pointer
-    return result;
+    // Return the field
+    return InputField {current_field_};
 }
 
