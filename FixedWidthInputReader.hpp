@@ -24,10 +24,12 @@
 #include <array>
 
 // fixed-width field input stream reader
+template<int ...Ns>
 class FixedWidthInputReader : public InputReader {
 private:
     // Array to hold the field widths.
-    const std::array<size_t, 3> field_widths_ {8, 3, 8};
+    const std::array<size_t, sizeof...(Ns)> field_widths_ {Ns...};
+
     // Counter of how many fields from the current row have been read
     size_t current_field_count_;
     // Counter of how many characters from the current field have been read
@@ -41,5 +43,43 @@ public:
       current_field_chars_{0}
     {}
 };
+
+template<int ...Ns>
+bool FixedWidthInputReader<Ns...>::ProcessChar(const char in_char) {
+    // Newlines separate rows
+    if (in_char == '\n') {
+        // Reset position in the current row to character 0, field 0
+        current_field_count_ = 0;
+        current_field_chars_ = 0;
+        /*
+         * Will have already signalled the end of the last field when the
+         * final character was read.
+         */
+        return false;
+    }
+
+    // There are no separators, all non-newline characters belong to a field
+    current_field_ += in_char;
+
+    // Add one to the count of characters read into the current field
+    ++current_field_chars_;
+
+    /*
+     * If the number of characters read now equals the width of the current
+     * then that is the end of this field.
+     */
+    if (field_widths_.at(current_field_count_) == current_field_chars_) {
+        // The next character will belong to the next field
+        ++current_field_count_;
+        /*
+         * ...and will be the first character of that field (we have read 0
+         * characters from the next field so far)
+         */
+        current_field_chars_ = 0;
+        return true; // End of field
+    }
+
+    return false; // Unless that was the last character, not end of field
+}
 
 #endif //INPUTREADER_FIXEDWIDTHINPUTREADER_HPP

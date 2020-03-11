@@ -39,7 +39,7 @@ int main() {
     }
 
     // Create an instance of our FixedWidthInputReader
-    FixedWidthInputReader reader {in_file};
+    FixedWidthInputReader<8, 3, 8> reader {in_file};
 
     // Get the first 5 fields
     std::cout << reader.GetNextField() << std::endl;
