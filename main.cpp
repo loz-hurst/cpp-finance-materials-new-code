@@ -18,35 +18,36 @@
  */
 
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <memory>
 
-#include "CSVInputReader.hpp"
-#include "FixedWidthInputReader.hpp"
+#include "InputReader.hpp"
+#include "FixedWidthInputReader.hpp" // For templated factory
 
 // Program entry point
 int main() {
     const std::string filename {"../test.dat"}; // Input filename
 
-    // Create an input file stream to the input file
-    std::shared_ptr<std::ifstream> in_file {std::make_shared<std::ifstream>(filename)};
+    // Create an instance of our FixedWidthInputReader
+    //FixedWidthInputReader<8, 3, 8> reader {in_file};
+    std::unique_ptr<InputReader> reader;
 
-    // Check it opened okay - fail early if there's a problem.
-    if (!in_file->good()){
-        std::cerr << "Problem opening the file: " << filename << std::endl;
-        return 1;
+    try {
+        // For CSV or TSV (uses file extension to choose)
+        //reader = InputReaderFactory(filename);
+        // For fixed width fields - field widths are template arguments
+        reader = InputReaderFactory<8, 3, 8>(filename);
+    } catch (const std::exception & e) {
+        std::cerr << "A problem occurred opening " << filename << ": " << e.what() << std::endl;
+        return 1; // Abort with error status
     }
 
-    // Create an instance of our FixedWidthInputReader
-    FixedWidthInputReader<8, 3, 8> reader {in_file};
-
     // Get the first 5 fields
-    std::cout << reader.GetNextField() << std::endl;
-    std::cout << reader.GetNextField() << std::endl;
-    std::cout << reader.GetNextField() << std::endl;
-    std::cout << reader.GetNextField() << std::endl;
-    std::cout << reader.GetNextField() << std::endl;
+    std::cout << reader->GetNextField() << std::endl;
+    std::cout << reader->GetNextField() << std::endl;
+    std::cout << reader->GetNextField() << std::endl;
+    std::cout << reader->GetNextField() << std::endl;
+    std::cout << reader->GetNextField() << std::endl;
 
     return 0;
 }

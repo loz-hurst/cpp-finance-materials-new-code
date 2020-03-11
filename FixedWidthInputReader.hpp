@@ -82,4 +82,22 @@ bool FixedWidthInputReader<Ns...>::ProcessChar(const char in_char) {
     return false; // Unless that was the last character, not end of field
 }
 
+/*
+ * Templated version of InputReaderFactory to use with FixedWidthInputReaders.
+ *
+ * See InputReader.hpp for original, including args and return values.
+ */
+template<int ...Ns>
+std::unique_ptr<InputReader> InputReaderFactory(std::string filename) {
+    // Create an input file stream to the input file
+    std::shared_ptr<std::ifstream> in_file {std::make_shared<std::ifstream>(filename)};
+
+    // Check it opened okay - fail early if there's a problem.
+    if (!in_file->good()){
+        throw std::runtime_error {"Problem opening " + filename + " in InputReaderFactory"};
+    }
+
+    return std::make_unique<FixedWidthInputReader<Ns...>>(in_file);
+}
+
 #endif //INPUTREADER_FIXEDWIDTHINPUTREADER_HPP

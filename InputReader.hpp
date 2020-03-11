@@ -70,4 +70,15 @@ public:
     InputField GetNextField();
 };
 
+/*
+ * Constructs and returns an appropriate InputReader
+ *
+ * Args:
+ *  filename: path to file to open
+ *
+ * Returns:
+ *  Unique pointer to a constructed InputReader object
+ */
+std::unique_ptr<InputReader> InputReaderFactory(std::string filename);
+
 #endif //INPUTREADER_INPUTREADER_HPP

@@ -17,12 +17,15 @@
  * along with C++ for Finance.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <exception>
+#include <fstream>
+#include <istream>
 #include <memory>
 #include <string>
-#include <exception>
-#include <istream>
 
 #include "InputReader.hpp"
+#include "CSVInputReader.hpp"
+#include "TSVInputReader.hpp"
 
 InputField InputReader::GetNextField() {
     // Clear the field read for the next input
@@ -48,5 +51,27 @@ InputField InputReader::GetNextField() {
 
     // Return the field
     return InputField {current_field_};
+}
+
+std::unique_ptr<InputReader> InputReaderFactory(std::string filename) {
+    const std::string extension {filename.substr(filename.size()-4, 4)};
+
+    // Create an input file stream to the input file
+    std::shared_ptr<std::ifstream> in_file {std::make_shared<std::ifstream>(filename)};
+
+    // Check it opened okay - fail early if there's a problem.
+    if (!in_file->good()){
+        throw std::runtime_error {"Problem opening " + filename + " in InputReaderFactory"};
+    }
+
+    if (extension == ".csv") {
+        // Construct a CSV reader
+        return std::make_unique<CSVInputReader>(in_file);
+    } else if (extension == ".tsv") {
+        // Construct a TSV reader
+        return std::make_unique<TSVInputReader>(in_file);
+    } else {
+        throw std::invalid_argument {"Unknown file extension in InputReaderFactory: " + extension};
+    }
 }
 
