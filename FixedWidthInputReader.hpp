@@ -22,6 +22,7 @@
 #include "InputReader.hpp"
 
 #include <array>
+#include <fstream>
 
 // fixed-width field input stream reader
 template<int ...Ns>
